@@ -52,13 +52,17 @@ module.exports = {
         });
     },
     getPokemonByNickname: function (req, result) {
-        var sql = "select * from pokemons where lower(nickname) = lower(?)"
-        var params = [req.body.nickname]
-        db.all(sql, params, (err, rows) => {
-            if (err) {
-                result(err, null);
-            }
-            result(null, { data: rows });
-        });
+        if (req.body.nickname == '') {
+            result(null, { data: null });
+        } else {
+            var sql = "select * from pokemons where lower(nickname) = lower(?)"
+            var params = [req.body.nickname]
+            db.all(sql, params, (err, rows) => {
+                if (err) {
+                    result(err, null);
+                }
+                result(null, { data: rows });
+            });
+        }
     }
 }
