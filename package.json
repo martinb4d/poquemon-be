@@ -1,0 +1,26 @@
+{
+  "name": "poquemon-be",
+  "version": "1.0.0",
+  "description": "backend for poquemon",
+  "main": "App.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "md5": "^2.3.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node App.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinb4d/poquemon-be.git"
+  },
+  "author": "Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinb4d/poquemon-be/issues"
+  },
+  "homepage": "https://github.com/martinb4d/poquemon-be#readme"
+}
