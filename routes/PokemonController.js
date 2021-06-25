@@ -114,19 +114,35 @@ router.post('/pokemons', function (req, res, next) {
         res.status(status).send({ respCode, message });
         return;
     }
-
-    pokemon.savePokemon(req, function (err, result) {
-    
+    pokemon.getPokemonByNickname(req, function (err, result) {
         if (err) {
             status = 500;
             respCode = '99';
             message = 'Internal Server Error';
+            res.status(status).send({ respCode, message });
+            return;
         } else {
-            status = 200;
-            respCode = '00';
-            data={id: result, message}
+            if (result.data && result.data.length > 0) {
+                status = 200;
+                respCode = '99';
+                message = 'Nickname already exist';
+                res.status(status).send({ respCode, message });
+                return;
+            } else {
+                pokemon.savePokemon(req, function (err, result) {
+                    if (err) {
+                        status = 500;
+                        respCode = '99';
+                        message = 'Internal Server Error';
+                    } else {
+                        status = 200;
+                        respCode = '00';
+                        data = { id: result, message }
+                    }
+                    res.status(status).send({ respCode, data });
+                });
+            }
         }
-        res.status(status).send({ respCode, data });
     });
 });
 router.get('/pokemons/all/summary', function (req, res, next) {
