@@ -11,7 +11,6 @@ function randomize(min, max) {
 router.get('/pokemons', function (req, res, next) {
     let respCode;
     let status;
-    console.log('babi lah');
     pokemon.getAllPokemons(req, function (err, result) {
         if (err) {
             status = 500;
@@ -21,7 +20,6 @@ router.get('/pokemons', function (req, res, next) {
             status = 200;
             respCode = '00';
         }
-        console.log('babi lah', result.data);
         res.status(status).send({ respCode, data: result.data });
     });
 });
